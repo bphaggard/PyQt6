@@ -1,20 +1,24 @@
-from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QApplication, QWidget, QHBoxLayout, QPushButton, QLabel
+from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QHBoxLayout
+from PyQt6.QtGui import QIcon, QFont
 import sys
+
 
 
 class Window(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.setGeometry(200, 200, 700, 400)
+        self.setGeometry(200,200, 700, 400)
         self.setWindowTitle("PyQt6 Event Handling")
-        self.createWidget()
+        self.setWindowIcon(QIcon('images/python.png'))
 
-    def createWidget(self):
+        self.create_widget()
+
+
+    def create_widget(self):
         hbox = QHBoxLayout()
         btn = QPushButton("Change Text")
-        btn.clicked.coonnect(self.clickedButton())
+        btn.clicked.connect(self.clicked_btn)
         self.label = QLabel("Default Text")
 
         hbox.addWidget(btn)
@@ -22,10 +26,11 @@ class Window(QWidget):
 
         self.setLayout(hbox)
 
-    def clickedButton(self):
+    def clicked_btn(self):
         self.label.setText("Another Text")
         self.label.setFont(QFont("Times", 15))
-        self.label.setStyleSheet("color:red")
+        self.label.setStyleSheet('color:red')
+
 
 app = QApplication(sys.argv)
 window = Window()
